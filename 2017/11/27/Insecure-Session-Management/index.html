@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+  <meta property="fb:admins" content="1817434146">
+  <meta property="fb:app_id" content="274615369727358">
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Learn Website Hacking / Penetration Testing From Scratch (15) [Ch15] Insecure Session ManagementUdemy 線上課程學習筆記  L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Insecure Session Management">
+<meta property="og:url" content="https://tony427.github.io/2017/11/27/Insecure-Session-Management/index.html">
+<meta property="og:site_name" content="Tony Tsai&#39;s blog">
+<meta property="og:description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Learn Website Hacking / Penetration Testing From Scratch (15) [Ch15] Insecure Session ManagementUdemy 線上課程學習筆記  L">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://i.imgur.com/arv3DyV.png">
+<meta property="og:image" content="https://i.imgur.com/6O5jDEp.png">
+<meta property="og:updated_time" content="2018-11-02T15:43:27.406Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Insecure Session Management">
+<meta name="twitter:description" content="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/ Learn Website Hacking / Penetration Testing From Scratch (15) [Ch15] Insecure Session ManagementUdemy 線上課程學習筆記  L">
+<meta name="twitter:image" content="https://i.imgur.com/arv3DyV.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://tony427.github.io/2017/11/27/Insecure-Session-Management/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Insecure Session Management | Tony Tsai's blog</title>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '274615369727358',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_TW/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128631884-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128631884-1');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tony Tsai's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">用hexo建立的blog</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>關於</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>歸檔</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tony427.github.io/2017/11/27/Insecure-Session-Management/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tony Tsai">
+      <meta itemprop="description" content="使用hexo建立的blog">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tony Tsai's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Insecure Session Management
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2017-11-27 12:00:00" itemprop="dateCreated datePublished" datetime="2017-11-27T12:00:00+08:00">2017-11-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2018-11-02 23:43:27" itemprop="dateModified" datetime="2018-11-02T23:43:27+08:00">2018-11-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/資訊安全/" itemprop="url" rel="index"><span itemprop="name">資訊安全</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/27/Insecure-Session-Management/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/27/Insecure-Session-Management/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/" target="_blank" rel="noopener">https://www.udemy.com/learn-website-hacking-penetration-testing-from-scratch/learn/v4/</a></p>
+<h1 id="Learn-Website-Hacking-Penetration-Testing-From-Scratch-15"><a href="#Learn-Website-Hacking-Penetration-Testing-From-Scratch-15" class="headerlink" title="Learn Website Hacking / Penetration Testing From Scratch (15)"></a>Learn Website Hacking / Penetration Testing From Scratch (15)</h1><blockquote>
+<p>[Ch15] Insecure Session Management<br>Udemy 線上課程學習筆記</p>
+</blockquote>
+<h2 id="Logging-In-As-Admin-Without-a-Password-By-Manipulating-Cookies"><a href="#Logging-In-As-Admin-Without-a-Password-By-Manipulating-Cookies" class="headerlink" title="Logging In As Admin Without a Password By Manipulating Cookies"></a>Logging In As Admin Without a Password By Manipulating Cookies</h2><ul>
+<li><code>FireFox</code> CookieManager+</li>
+<li><code>Chrome</code> EditThisCookie</li>
+</ul>
+<h2 id="Discovering-Cross-Site-Request-Forgery-Vulnerabilities-CSRF"><a href="#Discovering-Cross-Site-Request-Forgery-Vulnerabilities-CSRF" class="headerlink" title="Discovering Cross Site Request Forgery Vulnerabilities (CSRF)"></a>Discovering Cross Site Request Forgery Vulnerabilities (CSRF)</h2><blockquote>
+<ul>
+<li>Request are not validated at the server side.</li>
+<li>Server does not check if the user generated the request.</li>
+<li>Requests can be forged and sent to users to make them do things they don’t intend to do such as changing their password</li>
+</ul>
+</blockquote>
+<p>建立一個Local端的假表單，action指向原網站，即可利用使用者目前仍有效的Session或Cookie進行變更密碼的動作</p>
+<h2 id="Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-a-HTML-File"><a href="#Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-a-HTML-File" class="headerlink" title="Exploiting CSRF Vulnerabilities To Change Admin Password Using a HTML File"></a>Exploiting CSRF Vulnerabilities To Change Admin Password Using a HTML File</h2><p>承上一章節，預設好要變更的value，加上javascript，使用者開啟檔案就會自動送出表單。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'form1'</span>).submit();</span><br></pre></td></tr></table></figure>
+<h2 id="Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-Link"><a href="#Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-Link" class="headerlink" title="Exploiting CSRF Vulnerabilities To Change Admin Password Using Link"></a>Exploiting CSRF Vulnerabilities To Change Admin Password Using Link</h2><p>承上一章節，將製作好的html檔案放上網路空間。將連結送給使用者，只用者只要點擊url就會自動送出表單。</p>
+<p>put the csrf.html file to <code>Kali Linux</code> hosted by apache.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp Desktop/csrf.html /var/www/html</span><br><span class="line">service apache2 start</span><br></pre></td></tr></table></figure>
+<p>browse the <code>xxx.xxx.xxx/csrf.html</code></p>
+<h2 id="Security-The-Right-Way-To-Prevent-CSRF-Vulnerabilities"><a href="#Security-The-Right-Way-To-Prevent-CSRF-Vulnerabilities" class="headerlink" title="[Security] The Right Way To Prevent CSRF Vulnerabilities"></a>[Security] The Right Way To Prevent CSRF Vulnerabilities</h2><ol>
+<li>再次驗證舊密碼</li>
+<li>CSRF Token</li>
+</ol>
+<h2 id="以下補充"><a href="#以下補充" class="headerlink" title="以下補充"></a>以下補充</h2><h3 id="用自己的一句話解釋CSRF"><a href="#用自己的一句話解釋CSRF" class="headerlink" title="用自己的一句話解釋CSRF"></a>用自己的一句話解釋CSRF</h3><blockquote>
+<p>在使用者非自願的情況下，用使用者的身份(合法)送出偽造(非法)的請求。</p>
+</blockquote>
+<h3 id="所謂的Cross-Site"><a href="#所謂的Cross-Site" class="headerlink" title="所謂的Cross Site"></a>所謂的Cross Site</h3><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><h3 id="CSRF攻擊方式"><a href="#CSRF攻擊方式" class="headerlink" title="CSRF攻擊方式"></a>CSRF攻擊方式</h3><ol>
+<li>建立假的form，指定action post到目標網址</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">name</span>=<span class="string">"csrf-frame"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">'POST'</span> <span class="attr">action</span>=<span class="string">'https://small-min.blog.com/delete'</span> <span class="attr">target</span>=<span class="string">"csrf-frame"</span> <span class="attr">id</span>=<span class="string">"csrf-form"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'hidden'</span> <span class="attr">name</span>=<span class="string">'id'</span> <span class="attr">value</span>=<span class="string">'3'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'submit'</span> <span class="attr">value</span>=<span class="string">'submit'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.getElementById(<span class="string">"csrf-form"</span>).submit()</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="如何避免"><a href="#如何避免" class="headerlink" title="如何避免"></a>如何避免</h3><h4 id="ASP-NET"><a href="#ASP-NET" class="headerlink" title="ASP.NET"></a>ASP.NET</h4><p><img src="https://i.imgur.com/arv3DyV.png" alt=""></p>
+<p><img src="https://i.imgur.com/6O5jDEp.png" alt=""></p>
+<h4 id="NET-CORE"><a href="#NET-CORE" class="headerlink" title=".NET CORE"></a>.NET CORE</h4><p><a href="https://docs.microsoft.com/zh-tw/aspnet/core/security/anti-request-forgery" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/aspnet/core/security/anti-request-forgery</a></p>
+<p>CSRF token [anti forgrey token]</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF" target="_blank" rel="noopener">OWASP</a>)<br><a href="http://blog.techbridge.cc/2017/02/25/csrf-introduction/" target="_blank" rel="noopener">讓我們來談談 CSRF</a><br><a href="https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AB%8B%E6%B1%82%E5%81%BD%E9%80%A0" target="_blank" rel="noopener">跨站請求偽造</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+          
+          <div class="social-like">
+            
+
+            
+              <div class="fb_like">
+                <div class="fb-like" data-layout="button_count" data-share="true"></div>
+              </div>
+            
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/25/如何在自己網頁使用Facebook程式外掛/" rel="next" title="如何在自己網頁使用Facebook程式外掛">
+                <i class="fa fa-chevron-left"></i> 如何在自己網頁使用Facebook程式外掛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Tony Tsai">
+            
+              <p class="site-author-name" itemprop="name">Tony Tsai</p>
+              <p class="site-description motion-element" itemprop="description">使用hexo建立的blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分類</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Tony427" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.linkedin.com/in/tony-tsai-5b7b90a3/" target="_blank" title="LinkedIn"><i class="fa fa-fw fa-linkedin"></i>LinkedIn</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Learn-Website-Hacking-Penetration-Testing-From-Scratch-15"><span class="nav-number">1.</span> <span class="nav-text">Learn Website Hacking / Penetration Testing From Scratch (15)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logging-In-As-Admin-Without-a-Password-By-Manipulating-Cookies"><span class="nav-number">1.1.</span> <span class="nav-text">Logging In As Admin Without a Password By Manipulating Cookies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Discovering-Cross-Site-Request-Forgery-Vulnerabilities-CSRF"><span class="nav-number">1.2.</span> <span class="nav-text">Discovering Cross Site Request Forgery Vulnerabilities (CSRF)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-a-HTML-File"><span class="nav-number">1.3.</span> <span class="nav-text">Exploiting CSRF Vulnerabilities To Change Admin Password Using a HTML File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploiting-CSRF-Vulnerabilities-To-Change-Admin-Password-Using-Link"><span class="nav-number">1.4.</span> <span class="nav-text">Exploiting CSRF Vulnerabilities To Change Admin Password Using Link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Security-The-Right-Way-To-Prevent-CSRF-Vulnerabilities"><span class="nav-number">1.5.</span> <span class="nav-text">[Security] The Right Way To Prevent CSRF Vulnerabilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下補充"><span class="nav-number">1.6.</span> <span class="nav-text">以下補充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用自己的一句話解釋CSRF"><span class="nav-number">1.6.1.</span> <span class="nav-text">用自己的一句話解釋CSRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所謂的Cross-Site"><span class="nav-number">1.6.2.</span> <span class="nav-text">所謂的Cross Site</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">Cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF攻擊方式"><span class="nav-number">1.6.3.</span> <span class="nav-text">CSRF攻擊方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何避免"><span class="nav-number">1.6.4.</span> <span class="nav-text">如何避免</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ASP-NET"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">ASP.NET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NET-CORE"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">.NET CORE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考"><span class="nav-number">1.7.</span> <span class="nav-text">參考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tony Tsai</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://tonytsai-1.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'https://tony427.github.io/2017/11/27/Insecure-Session-Management/';
+        this.page.identifier = '2017/11/27/Insecure-Session-Management/';
+        this.page.title = 'Insecure Session Management';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://tonytsai-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
