@@ -2,20 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tony Tsai</title>
+<title>避免多重登入送出錯誤資料 - Tony Tsai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Tony Tsai">
-<meta property="og:url" content="https://tony427.github.io/index.html">
+    <meta name="description" content="故事是這樣的…">
+<meta name="keywords" content="dotnet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="避免多重登入送出錯誤資料">
+<meta property="og:url" content="https://tony427.github.io/2017/07/27/避免多重登入送出錯誤資料/index.html">
 <meta property="og:site_name" content="Tony Tsai">
+<meta property="og:description" content="故事是這樣的…">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://tony427.github.io/images/og_image.png">
+<meta property="og:image" content="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9">
+<meta property="og:updated_time" content="2019-05-14T01:19:34.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tony Tsai">
-<meta name="twitter:image" content="https://tony427.github.io/images/og_image.png">
+<meta name="twitter:title" content="避免多重登入送出錯誤資料">
+<meta name="twitter:description" content="故事是這樣的…">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9">
 
 
 
@@ -98,7 +103,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                <img src="/images/logo.svg" alt="避免多重登入送出錯誤資料" height="28">
             
             </a>
         </div>
@@ -106,7 +111,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active" href="/">首頁</a>
+                <a class="navbar-item" href="/">首頁</a>
                 
                 <a class="navbar-item" href="/categories/Software/">軟體設計</a>
                 
@@ -136,13 +141,12 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-    <div class="card">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-image">
-        <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="image is-7by1">
+        <span class="image is-7by1">
             <img class="thumbnail" src="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjF9" alt="避免多重登入送出錯誤資料">
-        </a>
+        </span>
     </div>
     
     <div class="card-content article ">
@@ -168,23 +172,86 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/07/27/避免多重登入送出錯誤資料/">避免多重登入送出錯誤資料</a>
+                避免多重登入送出錯誤資料
             
         </h1>
         <div class="content">
             <p>故事是這樣的…</p>
+<a id="more"></a>
+<p>某金融客戶站台接到客訴<br>客戶都登入了兩個網頁<br>(先不要問我user怎麼這麼神奇可以幹這件事)</p>
+<p>A帳號沒登出，B帳號又登入<br>結果A帳號又在原本的頁面送出表單<br>然後 Boom !!</p>
+<p>Magic…</p>
+<p>A帳號的資料寫進去B帳號了</p>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>估計應該是user開了兩個分頁<br>第一個分頁停在某個表單頁面尚未送出<br>第二個頁面一開始也是用A帳號登入<br>之後登出改用B帳號</p>
+<h2 id="怎麼解決"><a href="#怎麼解決" class="headerlink" title="怎麼解決"></a>怎麼解決</h2><p>解決構想來自於MVC的AntiForgeryToken作法。</p>
+<ol>
+<li>登入時產生新的Guid，並存入Session</li>
+<li>前端產生hidden欄位存入token</li>
+<li>post到後端時檢查目前Session中token與前端post過來的token是否相符<br>如此一來不同Tab在post資料時，若與目前Session中Token不相符，則進行後續導頁或登出動作</li>
+</ol>
+<h2 id="開始實作"><a href="#開始實作" class="headerlink" title="開始實作"></a>開始實作</h2><h3 id="前端使用HtmlHelper"><a href="#前端使用HtmlHelper" class="headerlink" title="前端使用HtmlHelper"></a>前端使用HtmlHelper</h3><p><code>HtmlHelper</code>用來在前端使用Razor語法產生Token</p>
+<figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web;</span><br><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.Helpers</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomHelpers</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MvcHtmlString <span class="hljs-title">IsSingleLoginToken</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> HtmlHelper helper</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        &#123;</span><br><span class="line">            <span class="hljs-keyword">string</span> name = <span class="hljs-string">"SingleLoginToken"</span>; <span class="hljs-comment">//hidden欄位的name與id名稱</span></span><br><span class="line">            <span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span> = HttpContext.Current.Session[<span class="hljs-string">"SingleLoginToken"</span>].ToString(); <span class="hljs-comment">//hidden的value</span></span><br><span class="line">            <span class="hljs-keyword">return</span> MvcHtmlString.Create(</span><br><span class="line">                <span class="hljs-string">$"&lt;input type=\"hidden\" id=\"<span class="hljs-subst">&#123;name&#125;</span>\" name=\"<span class="hljs-subst">&#123;name&#125;</span>\" value=\"<span class="hljs-subst">&#123;<span class="hljs-keyword">value</span>&#125;</span>\"&gt;"</span></span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方法如下：</p>
+<ol>
+<li><p>在WebConfig中加入namespace</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;namespaces&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Helpers&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Mvc&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Mvc.Ajax&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Mvc.Html&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Optimization&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.Routing&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;System.Web.WebPages&quot; /&gt;</span><br><span class="line">    &lt;add namespace=&quot;SingleLogin.Web.Helpers&quot; /&gt;</span><br><span class="line">&lt;/namespaces&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>View引入命名空間後使用<a href="mailto:`@Html.IsSingleLoginToken" target="_blank" rel="noopener">`@Html.IsSingleLoginToken</a>()`即可，使用方法跟AntiForgeryToken差不多</p>
+</li>
+</ol>
+<h3 id="後端Controller加上ActionFilter"><a href="#後端Controller加上ActionFilter" class="headerlink" title="後端Controller加上ActionFilter"></a>後端Controller加上ActionFilter</h3><p><code>Filter</code> 用來在後端Controller加上<code>[IsSingleLogin]</code>，用來驗證前端Post過來的Guid值<br><figure class="highlight cs hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.ActionFilters</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> 透過檢查埋入前端html的Token，比對後端Session中的token是否相同，以避免不同身分操作錯誤資料</span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">IsSingleLoginAttribute</span> : <span class="hljs-title">ActionFilterAttribute</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnActionExecuting</span>(<span class="hljs-params">ActionExecutingContext filterContext</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        &#123;</span><br><span class="line">            <span class="hljs-keyword">string</span> sessionVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">string</span> clientVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">var</span> serverSession = filterContext.HttpContext.Session[sessionVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">var</span> clientSession = filterContext.HttpContext.Request.Form[clientVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">if</span> (serverSession != clientSession)</span><br><span class="line">            &#123;</span><br><span class="line">                filterContext.Result = <span class="hljs-keyword">new</span> ContentResult()</span><br><span class="line">                &#123;</span><br><span class="line">                    ContentType = <span class="hljs-string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">                    <span class="hljs-comment">//用js alert後導頁登出</span></span><br><span class="line">                    Content = <span class="hljs-string">"&lt;script&gt;alert('系統偵測到您同時以兩個帳號登入同一個瀏覽器');window.location.href = '/Member/Logout';&lt;/script&gt;"</span></span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>前端就使用@Html.IsSingleLoginToken()<br>後端Controller加上 <code>[IsSingleLogin]</code> Filter<br>就可以簡單的加上驗證功能</p>
+<p>用AOP可以解方法的時候特別爽<br>跟菜鳥時期一頁一頁處理的過去說掰掰</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/07/27/避免多重登入送出錯誤資料/#more">繼續閱讀</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/dotnet/">dotnet</a>
                 </div>
             </div>
         </div>
         
         
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜歡我的文章嗎? 贊助我一杯咖啡吧!</h3>
+        <div class="buttons is-centered">
+            
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>PayPal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="DGXH4K22HBK7Y">
+    <input type="hidden" name="currency_code" value="TWD">
+</form>
+
+                
+        </div>
     </div>
 </div>
 
@@ -192,9 +259,29 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://tony427.github.io/2017/07/27/避免多重登入送出錯誤資料/';
+        this.page.identifier = '2017/07/27/避免多重登入送出錯誤資料/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'tonytsai-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
-
-
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
                 
@@ -382,7 +469,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                    <img src="/images/logo.svg" alt="避免多重登入送出錯誤資料" height="28">
                 
                 </a>
                 <p class="is-size-7">
