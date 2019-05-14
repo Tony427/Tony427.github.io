@@ -2,21 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分類 - Tony Tsai</title>
+<title>Win10解壓縮亂碼 - Tony Tsai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="Facebook,plugin,DotnetCore,C#,Life,win10,JekyII,ROR,dotnet">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tony Tsai">
-<meta property="og:url" content="https://tony427.github.io/categories/index.html">
+    <meta name="description" content="Win10 美版安裝中文語言包的雷">
+<meta name="keywords" content="win10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10解壓縮亂碼">
+<meta property="og:url" content="https://tony427.github.io/2019/05/14/Win10解壓縮亂碼/index.html">
 <meta property="og:site_name" content="Tony Tsai">
+<meta property="og:description" content="Win10 美版安裝中文語言包的雷">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://tony427.github.io/images/og_image.png">
+<meta property="og:image" content="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
+<meta property="og:updated_time" content="2019-05-14T09:32:37.964Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tony Tsai">
-<meta name="twitter:image" content="https://tony427.github.io/images/og_image.png">
+<meta name="twitter:title" content="Win10解壓縮亂碼">
+<meta name="twitter:description" content="Win10 美版安裝中文語言包的雷">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
 
 
 
@@ -99,7 +103,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                <img src="/images/logo.svg" alt="Win10解壓縮亂碼" height="28">
             
             </a>
         </div>
@@ -115,7 +119,7 @@
                 
                 <a class="navbar-item" href="/categories/Travel/">旅行手札</a>
                 
-                <a class="navbar-item is-active" href="/categories">分類</a>
+                <a class="navbar-item" href="/categories">分類</a>
                 
                 <a class="navbar-item" href="/about">關於我</a>
                 
@@ -137,35 +141,146 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="Win10解壓縮亂碼">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-14T09:29:32.000Z">2019-05-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Sofwtare/">Sofwtare</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分鐘 閱讀文 (大約 292 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Win10解壓縮亂碼
+            
+        </h1>
+        <div class="content">
+            <h1 id="Win10-美版安裝中文語言包的雷"><a href="#Win10-美版安裝中文語言包的雷" class="headerlink" title="Win10 美版安裝中文語言包的雷"></a>Win10 美版安裝中文語言包的雷</h1><a id="more"></a>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>目前是 <code>Dell XPS 9370</code> 美版整新機，因此出廠就是英文介面。本來是打算直接用英文介面，電腦拿去給公司資訊部設定AD，還有灌資安軟體，回來被直接安裝了中文語言包 :joy:</p>
+<p>但總覺得使用上偶爾還是卡卡的，列一下遇到的雷。</p>
+<ul>
+<li>先是遇到了 <strong><em>cmder</em></strong> 大家都是用<code>cp65001</code>的<code>utf-8</code>才能正常顯示游標以及中文。結果發現自己的要用<code>cp950</code>的<code>Big5</code>編碼，才不會有游標多一格以及亂跑的問題。</li>
+<li>接下來發現別人傳給我的zip檔，內部的檔案中文會變成亂碼，也是去改 <strong><em>WinRAR</em></strong> 的編碼才能正常顯示。<br><img src="https://i.imgur.com/tntQA5e.png" alt=""><br><img src="https://i.imgur.com/X24tpqn.png" alt=""></li>
+</ul>
+<p>嘗試過網路上將語言、地區等等都設成台灣，一樣無法解決。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>應該是系統不知道為何，預設編碼是<code>Big5</code>。</p>
+<p>目前還找不到解法可以將系統預設改為<code>UTF-8</code>編碼。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/win10/">win10</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分類
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Software/">
-            <span class="level-start">
-                <span class="level-item">Software</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Sofwtare/">
-            <span class="level-start">
-                <span class="level-item">Sofwtare</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li>
-            </ul>
+        <h3 class="menu-label has-text-centered">喜歡我的文章嗎? 贊助我一杯咖啡吧!</h3>
+        <div class="buttons is-centered">
+            
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>PayPal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="DGXH4K22HBK7Y">
+    <input type="hidden" name="currency_code" value="TWD">
+</form>
+
+                
         </div>
     </div>
-</div></div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/07/27/避免多重登入送出錯誤資料/">
+                <span class="level-item">避免多重登入送出錯誤資料</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://tony427.github.io/2019/05/14/Win10解壓縮亂碼/';
+        this.page.identifier = '2019/05/14/Win10解壓縮亂碼/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'tonytsai-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
                 
                 
 
@@ -389,7 +504,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                    <img src="/images/logo.svg" alt="Win10解壓縮亂碼" height="28">
                 
                 </a>
                 <p class="is-size-7">
