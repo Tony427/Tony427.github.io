@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Win10 美版安裝中文語言包的雷">
+    <meta name="description" content="Win10 美版改為中文語系的雷">
 <meta name="keywords" content="win10">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Win10解壓縮亂碼">
 <meta property="og:url" content="https://tony427.github.io/2019/05/14/Win10解壓縮亂碼/index.html">
 <meta property="og:site_name" content="Tony Tsai">
-<meta property="og:description" content="Win10 美版安裝中文語言包的雷">
+<meta property="og:description" content="Win10 美版改為中文語系的雷">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
-<meta property="og:updated_time" content="2019-05-14T09:39:01.570Z">
+<meta property="og:updated_time" content="2019-05-15T01:06:00.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Win10解壓縮亂碼">
-<meta name="twitter:description" content="Win10 美版安裝中文語言包的雷">
+<meta name="twitter:description" content="Win10 美版改為中文語系的雷">
 <meta name="twitter:image" content="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
 
 
@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark-reasonable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
 
 
     
@@ -163,7 +163,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分鐘 閱讀文 (大約 292 個字)
+                    2 分鐘 閱讀文 (大約 330 個字)
                 </span>
                 
                 
@@ -176,17 +176,34 @@
             
         </h1>
         <div class="content">
-            <h1 id="Win10-美版安裝中文語言包的雷"><a href="#Win10-美版安裝中文語言包的雷" class="headerlink" title="Win10 美版安裝中文語言包的雷"></a>Win10 美版安裝中文語言包的雷</h1><a id="more"></a>
-<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>目前是 <code>Dell XPS 9370</code> 美版整新機，因此出廠就是英文介面。本來是打算直接用英文介面，電腦拿去給公司資訊部設定AD，還有灌資安軟體，回來被直接安裝了中文語言包 :joy:</p>
+            <p>Win10 美版改為中文語系的雷<br><a id="more"></a></p>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>目前是 <code>Dell XPS 9370</code> 美版整新機，出廠就是英文OS。本來是打算直接用英文介面，結果電腦拿去給公司資訊部設定AD，還有灌資安軟體，回來被直接安裝了中文語言包 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://assets-cdn.github.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f602.png?v8">😂</span></p>
 <p>但總覺得使用上偶爾還是卡卡的，列一下遇到的雷。</p>
-<ul>
-<li>先是遇到了 <strong><em>cmder</em></strong> 大家都是用<code>cp65001</code>的<code>utf-8</code>才能正常顯示游標以及中文。結果發現自己的要用<code>cp950</code>的<code>Big5</code>編碼，才不會有游標多一格以及亂跑的問題。</li>
-<li>接下來發現別人傳給我的zip檔，內部的檔案中文會變成亂碼，也是去改 <strong><em>WinRAR</em></strong> 的編碼才能正常顯示。<br><img src="https://i.imgur.com/tntQA5e.png" alt=""><br><img src="https://i.imgur.com/X24tpqn.png" alt=""></li>
-</ul>
-<p>嘗試過網路上將語言、地區等等都設成台灣，一樣無法解決。</p>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>應該是系統不知道為何，預設編碼是<code>Big5</code>。</p>
+<h3 id="cmder游標多一隔空格"><a href="#cmder游標多一隔空格" class="headerlink" title="cmder游標多一隔空格"></a>cmder游標多一隔空格</h3><p>先是遇到了 <strong><em>cmder</em></strong> 大家都是用<code>cp65001</code>的<code>utf-8</code>才能正常顯示游標以及中文。<br>找了好多篇文章嘗試，還是沒有解決。<br>最後發現反而要用<code>cp950</code>的<code>Big5</code>編碼，才不會有游標多一格以及亂跑的問題。</p>
+<h3 id="zip內的中文檔名為亂碼"><a href="#zip內的中文檔名為亂碼" class="headerlink" title="zip內的中文檔名為亂碼"></a>zip內的中文檔名為亂碼</h3><p>接下來遇到的問題是，別人傳給我的zip檔，內部的檔案中文會變成亂碼。<br>嘗試過網路上將語言、地區等等都設成台灣，一樣無法解決。<br>最後也是將 <strong><em>WinRAR</em></strong> 的編碼改為<code>Big5</code>才能正常顯示。</p>
+<p><img src="https://i.imgur.com/tntQA5e.png" alt=""></p>
+<p><img src="https://i.imgur.com/X24tpqn.png" alt=""></p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>系統不知道為何，預設編碼是<code>Big5</code>。</p>
 <p>目前還找不到解法可以將系統預設改為<code>UTF-8</code>編碼。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -282,12 +299,11 @@
 </div>
 </div>
                 
-                
 
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -358,6 +374,12 @@
         
         
         <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/Tony427">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
             
             <a class="level-item button is-white is-marginless" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tony-tsai-5b7b90a3/">
                 
@@ -493,8 +515,13 @@
 </div>
     
     
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
 </div>
 
+                
             </div>
         </div>
     </section>
