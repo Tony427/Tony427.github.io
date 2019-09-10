@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>避免多重登入送出錯誤資料 - Tony Tsai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,7 @@
 <meta property="og:description" content="故事是這樣的… 某金融客戶站台接到客訴客戶登入了兩個網頁">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9">
-<meta property="og:updated_time" content="2019-05-31T17:42:58.183Z">
+<meta property="og:updated_time" content="2019-05-31T17:43:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="避免多重登入送出錯誤資料">
 <meta name="twitter:description" content="故事是這樣的… 某金融客戶站台接到客訴客戶登入了兩個網頁">
@@ -193,17 +193,17 @@
 </ol>
 <h2 id="開始實作"><a href="#開始實作" class="headerlink" title="開始實作"></a>開始實作</h2><hr>
 <h3 id="前端使用HtmlHelper"><a href="#前端使用HtmlHelper" class="headerlink" title="前端使用HtmlHelper"></a>前端使用HtmlHelper</h3><p><code>HtmlHelper</code>用來在前端使用Razor語法產生Token</p>
-<figure class="highlight cs hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web;</span><br><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.Helpers</span></span><br><span class="line">{</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomHelpers</span></span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MvcHtmlString <span class="hljs-title">IsSingleLoginToken</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> HtmlHelper helper</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        {</span><br><span class="line">            <span class="hljs-keyword">string</span> name = <span class="hljs-string">"SingleLoginToken"</span>; <span class="hljs-comment">//hidden欄位的name與id名稱</span></span><br><span class="line">            <span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span> = HttpContext.Current.Session[<span class="hljs-string">"SingleLoginToken"</span>].ToString(); <span class="hljs-comment">//hidden的value</span></span><br><span class="line">            <span class="hljs-keyword">return</span> MvcHtmlString.Create(</span><br><span class="line">                <span class="hljs-string">$"<input type="\" hidden\""="" id="\" <span"="" class="subst">{name}</span>\" name=\"<span class="hljs-subst">{name}</span>\" value=\"<span class="hljs-subst">{<span class="hljs-keyword">value</span>}</span>\">"</span><br><span class="line">            );</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cs hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web;</span><br><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.Helpers</span></span><br><span class="line">{</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomHelpers</span></span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MvcHtmlString <span class="hljs-title">IsSingleLoginToken</span>(<span class="hljs-params"><span class="hljs-keyword">this</span> HtmlHelper helper</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        {</span><br><span class="line">            <span class="hljs-keyword">string</span> name = <span class="hljs-string">"SingleLoginToken"</span>; <span class="hljs-comment">//hidden欄位的name與id名稱</span></span><br><span class="line">            <span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span> = HttpContext.Current.Session[<span class="hljs-string">"SingleLoginToken"</span>].ToString(); <span class="hljs-comment">//hidden的value</span></span><br><span class="line">            <span class="hljs-keyword">return</span> MvcHtmlString.Create(</span><br><span class="line">                <span class="hljs-string">$"&lt;input type=\"hidden\" id=\"<span class="hljs-subst">{name}</span>\" name=\"<span class="hljs-subst">{name}</span>\" value=\"<span class="hljs-subst">{<span class="hljs-keyword">value</span>}</span>\"&gt;"</span></span><br><span class="line">            );</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>使用方法如下：</p>
 <ol>
 <li><p>在WebConfig中加入namespace</p>
- <figure class="highlight xml hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag"><<span class="hljs-name">namespaces</span>></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Helpers"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc.Ajax"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc.Html"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Optimization"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Routing"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.WebPages"</span> /></span></span><br><span class="line">    <span class="hljs-tag"><<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"SingleLogin.Web.Helpers"</span> /></span></span><br><span class="line"><span class="hljs-tag">namespaces</span>></span><br></pre></td></tr></tbody></table></figure>
+ <figure class="highlight xml hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">namespaces</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Helpers"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc.Ajax"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Mvc.Html"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Optimization"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.Routing"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"System.Web.WebPages"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">"SingleLogin.Web.Helpers"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">namespaces</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li><p>View引入命名空間後使用<a href="mailto:`@Html.IsSingleLoginToken" target="_blank" rel="noopener">`@Html.IsSingleLoginToken</a>()`即可，使用方法跟AntiForgeryToken差不多</p>
 </li>
 </ol>
 <h3 id="後端Controller加上ActionFilter"><a href="#後端Controller加上ActionFilter" class="headerlink" title="後端Controller加上ActionFilter"></a>後端Controller加上ActionFilter</h3><p><code>Filter</code> 用來在後端Controller加上<code>[IsSingleLogin]</code>，用來驗證前端Post過來的Token值</p>
-<figure class="highlight cs hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.ActionFilters</span></span><br><span class="line">{</span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag"><summary></summary></span></span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> 透過檢查埋入前端html的Token，比對後端Session中的token是否相同，以避免不同身分操作錯誤資料</span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag"></span></span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">IsSingleLoginAttribute</span> : <span class="hljs-title">ActionFilterAttribute</span></span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnActionExecuting</span>(<span class="hljs-params">ActionExecutingContext filterContext</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        {</span><br><span class="line">            <span class="hljs-keyword">string</span> sessionVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">string</span> clientVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">var</span> serverSession = filterContext.HttpContext.Session[sessionVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">var</span> clientSession = filterContext.HttpContext.Request.Form[clientVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">if</span> (serverSession != clientSession)</span><br><span class="line">            {</span><br><span class="line">                filterContext.Result = <span class="hljs-keyword">new</span> ContentResult()</span><br><span class="line">                {</span><br><span class="line">                    ContentType = <span class="hljs-string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">                    <span class="hljs-comment">//用js alert後導頁登出</span></span><br><span class="line">                    Content = <span class="hljs-string">"<script_>alert('系統偵測到您同時以兩個帳號登入同一個瀏覽器');window.location.href = '/Member/Logout';"</script_></span></span><br><span class="line">                };</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight cs hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">using</span> System.Web.Mvc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">SingleLogin.Web.ActionFilters</span></span><br><span class="line">{</span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> 透過檢查埋入前端html的Token，比對後端Session中的token是否相同，以避免不同身分操作錯誤資料</span></span><br><span class="line">    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">IsSingleLoginAttribute</span> : <span class="hljs-title">ActionFilterAttribute</span></span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnActionExecuting</span>(<span class="hljs-params">ActionExecutingContext filterContext</span>)</span></span><br><span class="line"><span class="hljs-function"></span>        {</span><br><span class="line">            <span class="hljs-keyword">string</span> sessionVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">string</span> clientVariableName = <span class="hljs-string">"SingleLoginToken"</span>;</span><br><span class="line">            <span class="hljs-keyword">var</span> serverSession = filterContext.HttpContext.Session[sessionVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">var</span> clientSession = filterContext.HttpContext.Request.Form[clientVariableName].ToString();</span><br><span class="line">            <span class="hljs-keyword">if</span> (serverSession != clientSession)</span><br><span class="line">            {</span><br><span class="line">                filterContext.Result = <span class="hljs-keyword">new</span> ContentResult()</span><br><span class="line">                {</span><br><span class="line">                    ContentType = <span class="hljs-string">"text/html; charset=UTF-8"</span>,</span><br><span class="line">                    <span class="hljs-comment">//用js alert後導頁登出</span></span><br><span class="line">                    Content = <span class="hljs-string">"&lt;script_&gt;alert('系統偵測到您同時以兩個帳號登入同一個瀏覽器');window.location.href = '/Member/Logout';&lt;/script&gt;"</span></span><br><span class="line">                };</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><hr>
 <p>前端就使用@Html.IsSingleLoginToken()<br>後端Controller加上 <code>[IsSingleLogin]</code> Filter<br>就可以簡單的加上驗證功能</p>
 <p>跟菜鳥時期一頁一頁處理的過去說掰掰</p>
@@ -364,7 +364,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        7
                     </p>
                 </div>
             </div>
@@ -384,7 +384,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        8
                     </p>
                 </div>
             </div>
@@ -420,6 +420,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/11/test/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="test">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T16:40:38.000Z">2019-09-11</time></div>
+                    <a href="/2019/09/11/test/" class="has-link-black-ter is-size-6">test</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/11/hexo-admin-置放圖片/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo admin 置放圖片">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T16:19:00.000Z">2019-09-11</time></div>
+                    <a href="/2019/09/11/hexo-admin-置放圖片/" class="has-link-black-ter is-size-6">hexo admin 置放圖片</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://images.unsplash.com/photo-1531030874896-fdef6826f2f7?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" alt="Gitlab CI/CD建置 - 以 Dotnet Core為例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-25T09:45:39.000Z">2019-06-25</time></div>
+                    <a href="/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/" class="has-link-black-ter is-size-6">Gitlab CI/CD建置 - 以 Dotnet Core為例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/software/">software</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -459,44 +516,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/05/14/Win10解壓縮亂碼/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="Win10解壓縮亂碼">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-14T09:29:32.000Z">2019-05-14</time></div>
-                    <a href="/2019/05/14/Win10解壓縮亂碼/" class="has-link-black-ter is-size-6">Win10解壓縮亂碼</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/software/">software</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjF9" alt="避免多重登入送出錯誤資料">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-07-27T04:00:00.000Z">2017-07-27</time></div>
-                    <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="has-link-black-ter is-size-6">避免多重登入送出錯誤資料</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/software/">software</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -512,13 +531,48 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/NET-Core/">
                         <span class="tag">.NET Core</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ASP-NET/">
                         <span class="tag">ASP.NET</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CI-CD/">
+                        <span class="tag">CI/CD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VS2017/">
+                        <span class="tag">VS2017</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Window-10/">
+                        <span class="tag">Window 10</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -541,7 +595,7 @@
         <h3 class="menu-label">
             標籤雲
         </h3>
-        <a href="/tags/NET-Core/" style="font-size: 10px;">.NET Core</a> <a href="/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a>
+        <a href="/tags/NET-Core/" style="font-size: 20px;">.NET Core</a> <a href="/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/DevOps/" style="font-size: 10px;">DevOps</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/VS2017/" style="font-size: 10px;">VS2017</a> <a href="/tags/Window-10/" style="font-size: 10px;">Window 10</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a>
     </div>
 </div>
 
@@ -555,12 +609,23 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/06/">
                 <span class="level-start">
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>

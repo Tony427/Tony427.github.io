@@ -2,20 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>彙整: 2017 - Tony Tsai</title>
+<title>Gitlab CI/CD建置 - 以 Dotnet Core為例 - Tony Tsai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Tony Tsai">
-<meta property="og:url" content="https://tony427.github.io/archives/2017/index.html">
+    <meta name="description" content="GitLab 提供了非常方便的CI/CD工具，並且上傳到Gitlab就可以使用公用的runner來進行建置，不需要額外自己架Jenkins，就可以快速建立流水線，並且整合Slack等等工具，初次接觸CI/CD如我也是居然一下就成功了。">
+<meta name="keywords" content=".NET Core,Gitlab,CI&#x2F;CD,DevOps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gitlab CI&#x2F;CD建置 - 以 Dotnet Core為例">
+<meta property="og:url" content="https://tony427.github.io/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/index.html">
 <meta property="og:site_name" content="Tony Tsai">
+<meta property="og:description" content="GitLab 提供了非常方便的CI/CD工具，並且上傳到Gitlab就可以使用公用的runner來進行建置，不需要額外自己架Jenkins，就可以快速建立流水線，並且整合Slack等等工具，初次接觸CI/CD如我也是居然一下就成功了。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https://tony427.github.io/images/og_image.png">
+<meta property="og:image" content="https://images.unsplash.com/photo-1531030874896-fdef6826f2f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
+<meta property="og:updated_time" content="2019-06-28T09:58:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tony Tsai">
-<meta name="twitter:image" content="https://tony427.github.io/images/og_image.png">
+<meta name="twitter:title" content="Gitlab CI&#x2F;CD建置 - 以 Dotnet Core為例">
+<meta name="twitter:description" content="GitLab 提供了非常方便的CI/CD工具，並且上傳到Gitlab就可以使用公用的runner來進行建置，不需要額外自己架Jenkins，就可以快速建立流水線，並且整合Slack等等工具，初次接觸CI/CD如我也是居然一下就成功了。">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1531030874896-fdef6826f2f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80">
 
 
 
@@ -98,7 +103,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                <img src="/images/logo.svg" alt="Gitlab CI/CD建置 - 以 Dotnet Core為例" height="28">
             
             </a>
         </div>
@@ -136,45 +141,176 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2017
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://images.unsplash.com/photo-1531030874896-fdef6826f2f7?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" alt="Gitlab CI/CD建置 - 以 Dotnet Core為例">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-25T09:45:39.000Z">2019-06-25</time>
                 
-                <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjF9" alt="避免多重登入送出錯誤資料">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2017-07-27T04:00:00.000Z">2017-07-27</time>
-                        <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="has-link-black-ter is-size-6">避免多重登入送出錯誤資料</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/software/">software</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/software/">software</a>
                 </div>
-            </article>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分鐘 閱讀文 (大約 272 個字)
+                </span>
+                
+                
+            </div>
+        </div>
         
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Gitlab CI/CD建置 - 以 Dotnet Core為例
+            
+        </h1>
+        <div class="content">
+            <p><code>GitLab</code> 提供了非常方便的CI/CD工具，並且上傳到Gitlab就可以使用公用的runner來進行建置，不需要額外自己架<code>Jenkins</code>，就可以快速建立流水線，並且整合Slack等等工具，初次接觸CI/CD如我也是居然一下就成功了。</p>
+<a id="more"></a>
+<p>我們快速整理一下整個建置的流程。</p>
+<ol>
+<li>寫專案，以及Test</li>
+<li>撰寫<code>.gitlab-ci.yml</code>運行腳本，這邊以Build以及Test兩個任務為例。</li>
+<li>當然就是要推上<code>Gitlab</code>版控囉。</li>
+<li>Slack設定Webhooks(<a href="https://slack.com/apps/XXXXXXXXX-incoming-webhooks" target="_blank" rel="noopener">https://slack.com/apps/XXXXXXXXX-incoming-webhooks</a>)</li>
+<li>Gitlab專案設定整合Slack notifacation service.</li>
+<li>執行測試。</li>
+</ol>
+<p>這樣就完成了自動build專案以及執行測試，並且會通知Slack的訊息</p>
+<h2 id="專案yaml檔案設定"><a href="#專案yaml檔案設定" class="headerlink" title="專案yaml檔案設定"></a>專案yaml檔案設定</h2><p><code>.gitlab-ci.yml</code><br></p><figure class="highlight yaml hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">image:</span> <span class="hljs-string">mcr.microsoft.com/dotnet/core/sdk:2.2</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">stages:</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">build</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">test</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">variables:</span></span><br><span class="line"><span class="hljs-attr">  source_path:</span> <span class="hljs-string">"src"</span></span><br><span class="line"><span class="hljs-attr">  test_path:</span> <span class="hljs-string">"tests"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">build_api:</span></span><br><span class="line"><span class="hljs-attr">  stage:</span> <span class="hljs-string">build</span></span><br><span class="line"><span class="hljs-attr">  script:</span></span><br><span class="line"><span class="hljs-bullet">    -</span> <span class="hljs-string">"cd $source_path/GitlabCI.WebAPI"</span></span><br><span class="line"><span class="hljs-bullet">    -</span> <span class="hljs-string">"dotnet build"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-attr">test:</span></span><br><span class="line"><span class="hljs-attr">  stage:</span> <span class="hljs-string">test</span></span><br><span class="line"><span class="hljs-attr">  script:</span></span><br><span class="line"><span class="hljs-bullet">    -</span> <span class="hljs-string">"cd $test_path/GitlabCI.Test"</span></span><br><span class="line"><span class="hljs-bullet">    -</span> <span class="hljs-string">"dotnet test"</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="gitlab-設定"><a href="#gitlab-設定" class="headerlink" title="gitlab 設定"></a>gitlab 設定</h2><h2 id="slack設定"><a href="#slack設定" class="headerlink" title="slack設定"></a>slack設定</h2><h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><a href="https://docs.gitlab.com/ee/user/project/integrations/slack.html" target="_blank" rel="noopener">Gitlab官網</a></li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/NET-Core/">.NET Core</a>, <a class="has-link-grey -link" href="/tags/CI-CD/">CI/CD</a>, <a class="has-link-grey -link" href="/tags/DevOps/">DevOps</a>, <a class="has-link-grey -link" href="/tags/Gitlab/">Gitlab</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜歡我的文章嗎? 贊助我一杯咖啡吧!</h3>
+        <div class="buttons is-centered">
+            
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>PayPal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="DGXH4K22HBK7Y">
+    <input type="hidden" name="currency_code" value="TWD">
+</form>
+
+                
         </div>
     </div>
 </div>
 
 
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/11/hexo-admin-置放圖片/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">hexo admin 置放圖片</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/17/VS2017無法建置Dotnet-2-2/">
+                <span class="level-item">VS2017無法建置Dotnet Core 2.2</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://tony427.github.io/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/';
+        this.page.identifier = '2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'tonytsai-1' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 
@@ -530,7 +666,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Tony Tsai" height="28">
+                    <img src="/images/logo.svg" alt="Gitlab CI/CD建置 - 以 Dotnet Core為例" height="28">
                 
                 </a>
                 <p class="is-size-7">

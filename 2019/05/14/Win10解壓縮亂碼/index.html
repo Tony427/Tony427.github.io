@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
 <title>Win10解壓縮亂碼 - Tony Tsai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,7 @@
 <meta property="og:description" content="Win10 美版改為中文語系的雷">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
-<meta property="og:updated_time" content="2019-05-31T17:43:08.966Z">
+<meta property="og:updated_time" content="2019-05-31T17:43:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Win10解壓縮亂碼">
 <meta name="twitter:description" content="Win10 美版改為中文語系的雷">
@@ -177,12 +177,12 @@
         </h1>
         <div class="content">
             <p>Win10 美版改為中文語系的雷<br><a id="more"></a></p>
-<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>目前是 <code>Dell XPS 9370</code> 美版整新機，出廠就是英文OS。本來是打算直接用英文介面，結果電腦拿去給公司資訊部設定AD，還有灌資安軟體，回來被直接安裝了中文語言包 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://assets-cdn.github.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f602.png?v8">😂</span></p>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>目前是 <code>Dell XPS 9370</code> 美版整新機，出廠就是英文OS。本來是打算直接用英文介面，結果電腦拿去給公司資訊部設定AD，還有灌資安軟體，回來被直接安裝了中文語言包 <span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">😂</span></p>
 <p>但總覺得使用上偶爾還是卡卡的，列一下遇到的雷。</p>
 <h3 id="cmder游標多一隔空格"><a href="#cmder游標多一隔空格" class="headerlink" title="cmder游標多一隔空格"></a>cmder游標多一隔空格</h3><p>先是遇到了 <strong><em>cmder</em></strong> 大家都是用<code>cp65001</code>的<code>utf-8</code>才能正常顯示游標以及中文。<br>找了好多篇文章嘗試，還是沒有解決。<br>最後發現反而要用<code>cp950</code>的<code>Big5</code>編碼，才不會有游標多一格以及亂跑的問題。</p>
 <h3 id="zip內的中文檔名為亂碼"><a href="#zip內的中文檔名為亂碼" class="headerlink" title="zip內的中文檔名為亂碼"></a>zip內的中文檔名為亂碼</h3><p>接下來遇到的問題是，別人傳給我的zip檔，內部的檔案中文會變成亂碼。<br>嘗試過網路上將語言、地區等等都設成台灣，一樣無法解決。<br>最後也是將 <strong><em>WinRAR</em></strong> 的編碼改為<code>Big5</code>才能正常顯示。</p>
-<p><img src="https://i.imgur.com/tntQA5e.png" alt=""></p>
-<p><img src="https://i.imgur.com/X24tpqn.png" alt=""></p>
+<p><img src="https://i.imgur.com/tntQA5e.png" alt></p>
+<p><img src="https://i.imgur.com/X24tpqn.png" alt></p>
 <h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>系統不知道為何，預設編碼是<code>Big5</code>。</p>
 <p>目前還找不到解法可以將系統預設改為<code>UTF-8</code>編碼。</p>
 <script>
@@ -349,7 +349,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        7
                     </p>
                 </div>
             </div>
@@ -369,7 +369,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        8
                     </p>
                 </div>
             </div>
@@ -405,6 +405,63 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/11/test/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="test">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T16:40:38.000Z">2019-09-11</time></div>
+                    <a href="/2019/09/11/test/" class="has-link-black-ter is-size-6">test</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/11/hexo-admin-置放圖片/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo admin 置放圖片">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-10T16:19:00.000Z">2019-09-11</time></div>
+                    <a href="/2019/09/11/hexo-admin-置放圖片/" class="has-link-black-ter is-size-6">hexo admin 置放圖片</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://images.unsplash.com/photo-1531030874896-fdef6826f2f7?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" alt="Gitlab CI/CD建置 - 以 Dotnet Core為例">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-25T09:45:39.000Z">2019-06-25</time></div>
+                    <a href="/2019/06/25/Gitlab-CI-CD建置-以-Dotnet-Core為例/" class="has-link-black-ter is-size-6">Gitlab CI/CD建置 - 以 Dotnet Core為例</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/software/">software</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -444,44 +501,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/05/14/Win10解壓縮亂碼/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1516572980581-c9bd8bff75b0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80" alt="Win10解壓縮亂碼">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-14T09:29:32.000Z">2019-05-14</time></div>
-                    <a href="/2019/05/14/Win10解壓縮亂碼/" class="has-link-black-ter is-size-6">Win10解壓縮亂碼</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/software/">software</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://images.unsplash.com/photo-1533121148758-0e29f0049e49?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjF9" alt="避免多重登入送出錯誤資料">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-07-27T04:00:00.000Z">2017-07-27</time></div>
-                    <a href="/2017/07/27/避免多重登入送出錯誤資料/" class="has-link-black-ter is-size-6">避免多重登入送出錯誤資料</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/software/">software</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -497,13 +516,48 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/NET-Core/">
                         <span class="tag">.NET Core</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ASP-NET/">
                         <span class="tag">ASP.NET</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CI-CD/">
+                        <span class="tag">CI/CD</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DevOps/">
+                        <span class="tag">DevOps</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VS2017/">
+                        <span class="tag">VS2017</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Window-10/">
+                        <span class="tag">Window 10</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -526,7 +580,7 @@
         <h3 class="menu-label">
             標籤雲
         </h3>
-        <a href="/tags/NET-Core/" style="font-size: 10px;">.NET Core</a> <a href="/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a>
+        <a href="/tags/NET-Core/" style="font-size: 20px;">.NET Core</a> <a href="/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/tags/CI-CD/" style="font-size: 10px;">CI/CD</a> <a href="/tags/DevOps/" style="font-size: 10px;">DevOps</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/VS2017/" style="font-size: 10px;">VS2017</a> <a href="/tags/Window-10/" style="font-size: 10px;">Window 10</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a>
     </div>
 </div>
 
@@ -540,12 +594,23 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/archives/2019/06/">
                 <span class="level-start">
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
