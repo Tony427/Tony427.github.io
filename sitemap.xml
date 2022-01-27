@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://tony427.github.io/tags/index.html</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/categories/index.html</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/2019/06/02/%E6%BA%9D%E9%80%9A%E6%8A%80%E5%B7%A7/</loc>
+    
+    <lastmod>2022-01-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/2019/06/25/Gitlab-CI-CD%E5%BB%BA%E7%BD%AE-%E4%BB%A5-Dotnet-Core%E7%82%BA%E4%BE%8B/</loc>
+    
+    <lastmod>2022-01-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/2019/06/17/VS2017%E7%84%A1%E6%B3%95%E5%BB%BA%E7%BD%AEDotnet-2-2/</loc>
+    
+    <lastmod>2019-06-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/2019/05/14/Win10%E8%A7%A3%E5%A3%93%E7%B8%AE%E4%BA%82%E7%A2%BC/</loc>
+    
+    <lastmod>2019-05-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/2017/07/27/%E9%81%BF%E5%85%8D%E5%A4%9A%E9%87%8D%E7%99%BB%E5%85%A5%E9%80%81%E5%87%BA%E9%8C%AF%E8%AA%A4%E8%B3%87%E6%96%99/</loc>
+    
+    <lastmod>2019-05-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/about/index.html</loc>
+    
+    <lastmod>2019-05-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  <url>
+    <loc>https://tony427.github.io/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://tony427.github.io/tags/NET-Core/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/Gitlab/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/CI-CD/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/DevOps/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/VS2017/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/Windows-10/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/tags/ASP-NET/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>https://tony427.github.io/categories/software/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tony427.github.io/categories/life/</loc>
+    <lastmod>2022-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+</urlset>
